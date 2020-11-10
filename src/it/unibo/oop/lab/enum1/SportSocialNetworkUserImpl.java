@@ -80,9 +80,7 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      */
     // TODO
     public void addSport(final Sport sport) {
-    	if(!this.hasSport(sport)) {
-    		this.sports.add(sport);
-    	}
+    	this.sports.add(sport);
     }
 
     /**
