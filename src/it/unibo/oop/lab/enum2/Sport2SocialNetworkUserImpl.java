@@ -131,10 +131,7 @@ public class Sport2SocialNetworkUserImpl<U extends User> extends SocialNetworkUs
     public Set<Sport> getSportsPracticedInPlace(Place p) {
     	Set<Sport> sportsInPlace = new HashSet<>();
     	for(Sport current : this.sports) {
-    		if(p == Place.INDOOR && current.isIndoorSport()) {
-    			sportsInPlace.add(current);
-    		}
-    		else if(p == Place.OUTDOOR && !current.isIndoorSport()) {
+    		if(current.getPlace() == p) {
     			sportsInPlace.add(current);
     		}
     	}
