@@ -53,12 +53,12 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      * TODO: initialize properly these sports
      */
     static {
-        SOCCER = null;
-        F1 = null;
-        MOTOGP = null;
-        VOLLEY = null;
-        BASKET = null;
-        BIKE = null;
+        SOCCER = new Sport("Soccer");
+        F1 = new Sport("F1");
+        MOTOGP = new Sport("MotoGP");
+        VOLLEY = new Sport("Volley");
+        BASKET = new Sport("Basket");
+        BIKE = new Sport("Bike");
     }
 
     /**
@@ -112,9 +112,10 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      * @param sport
      *            a sport followed/done by the user
      */
-    // TODO
     public void addSport(final Sport sport) {
-
+    	if(!this.sports.contains(sport)) {
+    		this.sports.add(sport);
+    	}
     }
 
     /**
@@ -124,27 +125,47 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      *            sport to use as an input
      * @return true if a user likes sport s
      */
-    // TODO
     public boolean hasSport(final Sport s) {
-        return false;
+        return this.sports.contains(s);
     }
 
     /*
-     * TODO
-     * 
      * Complete the definition of this static inner class defining a Sport along
      * with its bare name.
      */
     public static final class Sport {
-        /*
-         * TODO
-         * 
+        /* 
          * Redefine equals so that two sports are equal only if they feature the
          * very same name. Remember that you must also redefine hashCode()!
          */
-        @Override
-        public boolean equals(final Object o) {
-            return false;
-        }
+        
+    	private String sportName;
+    	
+    	public Sport (String sportName) {
+    		this.sportName = sportName;
+    	}
+    	
+        public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((sportName == null) ? 0 : sportName.hashCode());
+			return result;
+		}
+
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (this.getClass() != obj.getClass())
+				return false;
+			Sport other = (Sport) obj;
+			if (sportName == null) {
+				if (other.sportName != null)
+					return false;
+			} else if (!sportName.equals(other.sportName))
+				return false;
+			return true;
+		}
     }
 }
