@@ -25,16 +25,20 @@ public class AcceptableTest {
         /*
          * Correct acceptance of [10, 20, 30, 40]
          */
-        final List<Integer> list = Arrays.asList(10, 20, 30, 40);
-        /*
-         * the following needs instantiation
-         */
-        final Acceptable<Integer> acc = null;
-        final Acceptor<Integer> acceptor = acc.acceptor();
-        for (final Integer el: list) {
-            acceptor.accept(el);
-        }
-        acceptor.end();
+    	try {
+    		final List<Integer> list = Arrays.asList(10, 20, 30, 40);
+    		/*
+    		 * the following needs instantiation
+    		 */
+    		final Acceptable<Integer> acc = new OneListAcceptable<>(list);
+    		final Acceptor<Integer> acceptor = acc.acceptor();
+    		for (final Integer el: list) {
+    			acceptor.accept(el);
+    		}
+    		acceptor.end();
+    	} catch (Exception e) {
+    		System.out.println("Sequence was supposed to be correct!");
+    	}
     }
 
     /**
@@ -47,7 +51,7 @@ public class AcceptableTest {
          * Failing acceptance
          */
         final List<Integer> list = Arrays.asList(10, 20, 30, 40);
-        final Acceptable<Integer> acc = null;
+        final Acceptable<Integer> acc = new OneListAcceptable<>(list);
         final Acceptor<Integer> acceptor = acc.acceptor();
         try {
             for (final Integer el: list) {
@@ -79,7 +83,7 @@ public class AcceptableTest {
          * Exception due to early end
          */
         final List<Integer> list = Arrays.asList(10, 20, 30, 40);
-        final Acceptable<Integer> acc = null;
+        final Acceptable<Integer> acc = new OneListAcceptable<>(list);
         final Acceptor<Integer> acceptor = acc.acceptor();
         try {
             acceptor.accept(10);
